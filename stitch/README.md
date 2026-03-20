@@ -1,89 +1,66 @@
-# Precision Editorial Finance Tracker
+# Stitch
 
-A simple responsive finance tracker app with a modern mobile UI, API backend, MongoDB persistence, and PDF export.
+A Node.js web application for managing personal finance transactions. Built with Express.js and MongoDB, featuring transaction tracking, editing, deletion, and PDF export capabilities.
 
 ## Features
-- Add, edit, delete transactions with amount, category, date, description
-- Store transactions in MongoDB
-- View summary totals and recent transactions
-- Toggle dark/light theme with full UI background updates
-- Export transaction report as PDF
-- API endpoints for CRUD operations
 
-## Tech Stack
-- Frontend: HTML, Tailwind CSS, Vanilla JavaScript
-- Backend: Node.js, Express
-- Database: MongoDB (via Mongoose)
-- PDF Export: PDFKit
+- Add and manage financial transactions
+- Edit and delete existing transactions
+- View transaction history
+- Export transaction data to PDF
+- RESTful API with CORS support
 
-## Project Structure
-```
-stitch/
-  public/index.html
-  server.js
-  package.json
-  README.md
-```
+## Installation
 
-## Prerequisites
-- Node.js (>= 18)
-- npm
-- MongoDB running locally on `mongodb://127.0.0.1:27017`
-
-## Setup
-1. Open project directory:
+1. Clone the repository:
    ```bash
-   cd c:\Users\harsh\OneDrive\Desktop\tracker\stitch
+   git clone <repository-url>
+   cd stitch
    ```
+
 2. Install dependencies:
    ```bash
    npm install
    ```
-3. Start MongoDB if not running.
 
-## Run
-```bash
-node server.js
-```
+3. Start the development server:
+   ```bash
+   npm run dev
+   ```
 
-Then open `http://localhost:3000` in your browser.
+4. Or start the production server:
+   ```bash
+   npm start
+   ```
 
-## Development
-For fast reloads, install `nodemon` globally and run:
-```bash
-npm install -g nodemon
-nodemon server.js
-```
+The server will run on `http://localhost:3000` (or the port specified in your environment).
+
+## Dependencies
+
+- **Express** - Web framework for Node.js
+- **Mongoose** - MongoDB object modeling
+- **CORS** - Cross-origin resource sharing
+- **PDFKit** - PDF generation library
+
+## Project Structure
+
+- `server.js` - Main server file
+- `public/` - Static client-side files
+  - `index.html` - Main HTML page
+  - `app.js` - Client-side JavaScript
+- `edit_delete_transaction/` - Transaction editing functionality
+- `home_add_transaction/` - Transaction addition functionality
+- `transaction_history_export/` - PDF export features
+- `equilibrium_finance/` - Finance-related utilities
 
 ## API Endpoints
-- `GET /api/health` — health check
-- `GET /api/transactions` — get all transactions
-- `POST /api/transactions` — add transaction
-- `PUT /api/transactions/:id` — update transaction
-- `DELETE /api/transactions/:id` — delete transaction
-- `GET /api/transactions/export/pdf` — download PDF report
 
-### Example Add Transaction Payload
-```json
-{
-  "description": "Lunch with friends",
-  "amount": -45,
-  "category": "Food & Drinks",
-  "date": "2026-03-20"
-}
-```
+The application provides RESTful API endpoints for transaction management. Refer to `server.js` for detailed endpoint definitions.
 
-## Notes
-- Amount determines type (income when >= 0, expense when < 0).
-- Currency is shown in INR (₹) in the UI.
-- Dark mode now updates all backgrounds and cards consistently.
+## Development
 
-## Troubleshooting
-- If server fails to start, ensure MongoDB is running and `MONGO_URI` is correct.
-- If UI doesn't update, refresh browser and confirm console has no JS errors.
+Use `npm run dev` for development with automatic restarts using nodemon.
 
-## Future Improvements
-- Add user authentication
-- Add pagination and filters by date/category
-- Add CSV export
-- Add charts for monthly spend trends
+## License
+
+ISC

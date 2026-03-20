@@ -35,7 +35,7 @@ app.get('/api/transactions', async (req, res) => {
 app.post('/api/transactions', async (req, res) => {
   try {
     const { description, amount, category, date } = req.body;
-    if (!amount || !category || !date) {
+    if (amount === undefined || !category || !date) {
       return res.status(400).json({ error: 'amount, category and date are required.' });
     }
     const t = new Transaction({
@@ -48,7 +48,6 @@ app.post('/api/transactions', async (req, res) => {
     await t.save();
     res.json(t);
   } catch (err) {
-    console.error(err);
     res.status(500).json({ error: 'Unable to create transaction.' });
   }
 });
@@ -71,7 +70,6 @@ app.put('/api/transactions/:id', async (req, res) => {
     if (!updated) return res.status(404).json({ error: 'Transaction not found.' });
     res.json(updated);
   } catch (err) {
-    console.error(err);
     res.status(500).json({ error: 'Unable to update transaction.' });
   }
 });
@@ -83,7 +81,6 @@ app.delete('/api/transactions/:id', async (req, res) => {
     if (!removed) return res.status(404).json({ error: 'Transaction not found.' });
     res.json({ success: true });
   } catch (err) {
-    console.error(err);
     res.status(500).json({ error: 'Unable to delete transaction.' });
   }
 });
@@ -101,37 +98,33 @@ app.get('/api/transactions/export/pdf', async (req, res) => {
     doc.font('Helvetica').fontSize(12).text(`Generated: ${new Date().toLocaleString()}`, { align: 'center' });
     doc.moveDown(1);
 
-    const lines = [['Date', 'Category', 'Amount', 'Description']];
-    transactions.forEach((t) => {
-      const dateStr = new Date(t.date).toLocaleDateString();
-      const amountStr = `${t.amount < 0 ? '-' : ''}$${Math.abs(t.amount).toFixed(2)}`;
-      lines.push([dateStr, t.category, amountStr, t.description || '-']);
-    });
-
-    const tableTop = doc.y + 10;
-    const colX = [50, 150, 300, 390];
-    doc.font('Helvetica-Bold').fontSize(11);
-    lines[0].forEach((cell, i) => doc.text(cell, colX[i], tableTop));
-    doc.moveDown(1);
-
+    // Header
+    doc.font('Helvetica-Bold').fontSize(11).text('Date', 50, doc.y, { width: 90 });
+    doc.text('Category', 140, doc.y, { width: 120 });
+    doc.text('Amount', 260, doc.y, { width: 90, align: 'right' });
+    doc.text('Description', 360, doc.y, { width: 180 });
+    doc.moveDown(0.5);
     doc.font('Helvetica').fontSize(10);
-    lines.slice(1).forEach((row, rowIndex) => {
-      const y = tableTop + 20 + rowIndex * 20;
-      row.forEach((cell, i) => {
-        doc.text(cell.toString(), colX[i], y, { width: i === 3 ? 150 : 120 });
-      });
+
+    transactions.forEach((t) => {
+      const dateStr = new Date(t.date).toLocaleDateString('en-IN');
+      const amountStr = `${t.amount < 0 ? '-' : ''}₹${Math.abs(t.amount).toFixed(2)}`;
+      doc.text(dateStr, 50, doc.y, { width: 90 });
+      doc.text(t.category, 140, doc.y, { width: 120 });
+      doc.text(amountStr, 260, doc.y, { width: 90, align: 'right' });
+      doc.text(t.description || '-', 360, doc.y, { width: 180 });
+      doc.moveDown(0.75);
     });
 
     doc.end();
   } catch (err) {
-    console.error(err);
     res.status(500).json({ error: 'Could not generate PDF report.' });
   }
 });
 
 app.get('/api/health', (req, res) => res.json({ status: 'ok' }));
 
-async function startServer() {
+(async function startServer() {
   try {
     await mongoose.connect(MONGO_URI);
     console.log('Mongo connected');
@@ -140,6 +133,4 @@ async function startServer() {
     console.error('Mongo connection error', err);
     process.exit(1);
   }
-}
-
-startServer();
+})();
