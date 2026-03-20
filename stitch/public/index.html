@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>The Precision Editorial - Finance Tracker</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+  tailwind.config = { darkMode: "class", theme: { extend: { colors: { "surface-variant": "#e3e1ea", "on-error-container": "#93000a", "on-tertiary-fixed-variant": "#733500", "on-tertiary": "#ffffff", "on-background": "#1b1b21", "secondary": "#006b5e", "on-error": "#ffffff", "secondary-fixed": "#97f3e2", "primary-fixed": "#dee0ff", "on-primary-container": "#bbc3ff", "inverse-surface": "#303037", "on-tertiary-container": "#ffb78a", "inverse-on-surface": "#f2eff9", "surface-tint": "#4555b7", "surface-dim": "#dbd9e2", "primary-container": "#3949ab", "on-surface-variant": "#454652", "on-surface": "#1b1b21", "error-container": "#ffdad6", "surface-container-lowest": "#ffffff", "on-primary-fixed-variant": "#2c3c9e", "tertiary-container": "#863f00", "secondary-fixed-dim": "#7ad7c6", "on-secondary-fixed-variant": "#005047", "tertiary-fixed-dim": "#ffb689", "outline": "#767684", "primary-fixed-dim": "#bbc3ff", "on-primary-fixed": "#000e5e", "background": "#fbf8ff", "on-primary": "#ffffff", "surface": "#fbf8ff", "surface-bright": "#fbf8ff", "on-secondary-fixed": "#00201b", "on-secondary-container": "#006f62", "surface-container": "#efedf6", "surface-container-low": "#f5f2fb", "surface-container-high": "#e9e7f0", "tertiary-fixed": "#ffdbc7", "on-secondary": "#ffffff", "outline-variant": "#c6c5d4", "error": "#ba1a1a", "on-tertiary-fixed": "#311300", "secondary-container": "#94f0df", "surface-container-highest": "#e3e1ea", "inverse-primary": "#bbc3ff", "primary": "#1e3093", "tertiary": "#632d00" }, fontFamily: { headline: ["Manrope"], body: ["Inter"], label: ["Inter"] }, borderRadius: { DEFAULT: "0.25rem", lg: "0.5rem", xl: "0.75rem", full: "9999px" } } } };
+</script>
+<style>
+  .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+  .signature-gradient { background: linear-gradient(135deg, #1e3093 0%, #3949ab 100%); }
+  body { min-height: 100vh; font-family: 'Inter', sans-serif; background: linear-gradient(180deg, #f3f5ff 0%, #edf1ff 100%); }
+</style>
+</head>
+<body class="bg-gradient-to-b from-slate-100 via-slate-50 to-white text-slate-900 dark:from-slate-950 dark:via-slate-900 dark:to-slate-900 dark:text-slate-100 font-body selection:bg-primary-fixed selection:text-on-primary-fixed">
+<header class="bg-[#eef2ff] dark:bg-slate-900 text-slate-900 dark:text-slate-100 flex justify-between items-center w-full px-4 md:px-6 h-16 sticky top-0 z-50 border-b border-[#e8ebff] dark:border-slate-700">
+  <div class="flex items-center gap-3">
+    <button class="text-[#1e3093] dark:text-[#dbeafe] hover:bg-[#f5f2fb] dark:hover:bg-[#1f2937] p-2 rounded-full"><span class="material-symbols-outlined">menu</span></button>
+    <h1 class="text-[#1e3093] dark:text-[#dbeafe] font-bold text-lg">The Precision Editorial</h1>
+  </div>
+  <div class="flex items-center gap-2">
+    <button id="themeToggle" class="bg-white dark:bg-slate-700 border border-slate-200 dark:border-slate-600 text-slate-700 dark:text-slate-200 px-3 py-1 rounded-full text-xs flex items-center gap-1"><span class="material-symbols-outlined">dark_mode</span> Theme</button>
+    <button class="text-[#1e3093] dark:text-[#dbeafe] hover:bg-[#f5f2fb] dark:hover:bg-[#1f2937] p-2 rounded-full"><span class="material-symbols-outlined">account_circle</span></button>
+  </div>
+</header>
+<main class="pb-28">
+<section class="px-6 pt-6">
+<div class="signature-gradient rounded-[2rem] p-6 text-on-primary shadow-xl relative overflow-hidden dark:shadow-none">
+  <p class="text-xs uppercase tracking-widest opacity-90">Total Net Worth</p>
+  <div class="flex items-end gap-1"><span class="text-surface-tint text-2xl">₹</span><h2 class="text-5xl font-bold"><span id="netWorth">0.00</span></h2></div>
+  <div class="mt-2 text-sm"><span class="bg-secondary-container/20 px-2 py-1 rounded-full">+2.4% this month</span></div>
+</div>
+</section>
+<section class="px-6 mt-5 grid grid-cols-2 gap-3">
+  <div class="bg-white dark:bg-slate-800 dark:border dark:border-slate-700 p-4 rounded-2xl shadow-sm"><p class="text-xs text-slate-500 dark:text-slate-300">Food & Dining</p><p class="text-xl font-bold">₹<span id="foodTotal">0.00</span></p></div>
+  <div class="bg-white dark:bg-slate-800 dark:border dark:border-slate-700 p-4 rounded-2xl shadow-sm"><p class="text-xs text-slate-500 dark:text-slate-300">Transport</p><p class="text-xl font-bold">₹<span id="transportTotal">0.00</span></p></div>
+</section>
+<section class="px-6 mt-5">
+  <div class="bg-white dark:bg-slate-800 dark:border dark:border-slate-700 p-5 rounded-[1.5rem] shadow-lg">
+    <div class="flex justify-between items-center mb-4"><h2 class="text-xl font-bold text-slate-900 dark:text-slate-100">Add Transaction</h2><button id="downloadPdfBtn" class="bg-cyan-500 text-white px-3 py-2 rounded-lg text-sm flex items-center gap-1"><span class="material-symbols-outlined">picture_as_pdf</span>Download PDF</button></div>
+    <form id="transactionForm" class="space-y-3">
+      <div><label class="text-[0.65rem] uppercase text-slate-500">Transaction Amount</label><input id="amount" type="number" required step="0.01" placeholder="0.00" class="w-full mt-1 p-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-indigo-300"></div>
+      <div class="grid grid-cols-2 gap-3"><div><label class="text-[0.65rem] uppercase text-slate-500">Category</label><select id="category" required class="w-full mt-1 p-3 rounded-xl border border-slate-200"><option value="Food & Drinks">Food & Drinks</option><option value="Transportation">Transportation</option><option value="Rent & Utilities">Rent & Utilities</option><option value="Entertainment">Entertainment</option><option value="Shopping">Shopping</option><option value="Salary">Salary</option></select></div><div><label class="text-[0.65rem] uppercase text-slate-500">Date</label><input id="date" type="date" required class="w-full mt-1 p-3 rounded-xl border border-slate-200"></div></div>
+      <div><label class="text-[0.65rem] uppercase text-slate-500">Description</label><input id="description" type="text" placeholder="What was this for?" class="w-full mt-1 p-3 rounded-xl border border-slate-200"></div>
+      <button type="submit" class="w-full bg-blue-700 text-white py-3 rounded-xl font-bold hover:bg-blue-800">+ Log Transaction</button>
+    </form>
+  </div>
+</section>
+<section class="px-6 mt-5">
+  <div class="flex justify-between items-center"><h3 class="text-lg font-bold text-slate-900 dark:text-slate-100">Monthly Spend</h3><button id="refreshBtn" class="text-blue-600 dark:text-cyan-300 text-sm">Refresh</button></div>
+  <div id="transactionsList" class="mt-3 space-y-2"></div>
+</section>
+</main>
+<nav class="fixed bottom-0 left-0 right-0 bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-700 py-2 px-4 flex justify-around">
+  <button class="text-indigo-700"><span class="material-symbols-outlined">home</span><div class="text-xs">Home</div></button>
+  <button class="text-slate-500"><span class="material-symbols-outlined">receipt_long</span><div class="text-xs">History</div></button>
+  <button class="text-slate-500"><span class="material-symbols-outlined">picture_as_pdf</span><div class="text-xs">Reports</div></button>
+</nav>
+<script>
+const state = { transactions: [] };
+
+function formatCurrency(v) { return Number(v).toLocaleString('en-IN', { style:'currency', currency:'INR', maximumFractionDigits:2 }); }
+function parseDate(d){const dt=new Date(d);return isNaN(dt)?'-':dt.toLocaleDateString('en-IN');}
+
+async function loadTransactions() {
+  const res = await fetch('/api/transactions');
+  state.transactions = await res.json();
+  renderSummary();
+  renderTransactions();
+}
+
+function renderSummary() {
+  const net = state.transactions.reduce((s,t)=>s+Number(t.amount),0);
+  const food = state.transactions.filter(t=>t.category.includes('Food')).reduce((s,t)=>s+Number(t.amount),0);
+  const transport = state.transactions.filter(t=>t.category.includes('Transport')).reduce((s,t)=>s+Number(t.amount),0);
+  document.getElementById('netWorth').textContent = formatCurrency(net);
+  document.getElementById('foodTotal').textContent = formatCurrency(food).replace('₹','');
+  document.getElementById('transportTotal').textContent = formatCurrency(transport).replace('₹','');
+}
+
+function renderTransactions() {
+  const container = document.getElementById('transactionsList');
+  container.innerHTML = '';
+  if (!state.transactions.length) {
+    container.innerHTML = '<div class="bg-white p-3 rounded-xl text-slate-500">No transactions yet.</div>';
+    return;
+  }
+  state.transactions.forEach(t => {
+    const item = document.createElement('div');
+    item.className = 'bg-white dark:bg-slate-800 dark:border dark:border-slate-700 p-3 rounded-xl shadow-sm';
+    const amountClass = t.amount >=0 ? 'text-emerald-500 dark:text-emerald-300' : 'text-red-600';
+    item.innerHTML = `
+      <div class="flex justify-between items-start gap-2">
+        <div>
+          <div class="font-semibold">${t.category}</div>
+          <div class="text-xs text-slate-500">${parseDate(t.date)}</div>
+          <div class="text-xs text-slate-500">${t.description || '—'}</div>
+        </div>
+        <div class="text-right">
+          <div class="font-bold ${amountClass}">${formatCurrency(t.amount)}</div>
+          <div class="mt-1 flex gap-1 justify-end"><button data-id="${t._id}" data-action="edit" class="text-xs text-blue-600">Edit</button><button data-id="${t._id}" data-action="delete" class="text-xs text-red-600">Delete</button></div>
+        </div>
+      </div>
+    `;
+    container.appendChild(item);
+  });
+}
+
+async function addTransaction(e) {
+  e.preventDefault();
+  const body = {
+    amount: Number(document.getElementById('amount').value),
+    category: document.getElementById('category').value,
+    date: document.getElementById('date').value,
+    description: document.getElementById('description').value,
+  };
+  const res = await fetch('/api/transactions', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(body) });
+  if (!res.ok) { alert('Error saving transaction'); return; }
+  document.getElementById('transactionForm').reset();
+  await loadTransactions();
+}
+
+document.getElementById('transactionForm').addEventListener('submit', addTransaction);
+document.getElementById('refreshBtn').addEventListener('click', loadTransactions);
+document.getElementById('downloadPdfBtn').addEventListener('click', () => {
+  window.open('/api/transactions/export/pdf', '_blank');
+});
+
+const themeToggle = document.getElementById('themeToggle');
+function setTheme(mode) {
+  if (mode === 'dark') {
+    document.documentElement.classList.add('dark');
+    themeToggle.innerHTML = '<span class="material-symbols-outlined">light_mode</span> Light';
+    localStorage.setItem('theme', 'dark');
+  } else {
+    document.documentElement.classList.remove('dark');
+    themeToggle.innerHTML = '<span class="material-symbols-outlined">dark_mode</span> Dark';
+    localStorage.setItem('theme', 'light');
+  }
+}
+
+const savedTheme = localStorage.getItem('theme') || 'light';
+setTheme(savedTheme);
+
+themeToggle.addEventListener('click', () => {
+  setTheme(document.documentElement.classList.contains('dark') ? 'light' : 'dark');
+});
+
+document.getElementById('transactionsList').addEventListener('click', async (e) => {
+  const button = e.target.closest('button');
+  if (!button) return;
+  const id = button.dataset.id;
+  if (button.dataset.action === 'delete') {
+    await fetch(`/api/transactions/${id}`, { method:'DELETE' });
+    await loadTransactions();
+    return;
+  }
+  if (button.dataset.action === 'edit') {
+    const tx = state.transactions.find(t=>t._id===id);
+    if (!tx) return;
+    const newAmount = prompt('Enter amount', tx.amount);
+    const newDesc = prompt('Enter description', tx.description);
+    if (newAmount === null || newDesc === null) return;
+    await fetch(`/api/transactions/${id}`, {
+      method:'PUT',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({ ...tx, amount: Number(newAmount), description: newDesc, date: new Date(tx.date).toISOString().split('T')[0] })
+    });
+    await loadTransactions();
+  }
+});
+
+loadTransactions().catch(err => { console.error(err); });
+</script>
+</body>
+</html>
